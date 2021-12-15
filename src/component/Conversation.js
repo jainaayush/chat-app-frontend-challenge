@@ -36,12 +36,7 @@ function Conversation() {
                         
                     })
                     .catch(err => console.log(err))
-                axios.get(`http://34.122.252.114:3000/conversations`, { headers: { "user_id": person[0]?.id } })
-                    .then(res => {
-                        console.log(res);
-                        // setallMessage(res.data)
-                    })
-                    .catch(err => console.log(err))
+             
             })
             .catch(err => console.log(err))
 
@@ -62,7 +57,7 @@ function Conversation() {
 
                     </div>
                 })}
-                <div className="title">
+                <div className="title container">
                     <input placeholder="write something........" type="text" onChange={(e) => {
                         setMessage(e.target.value)
                     }

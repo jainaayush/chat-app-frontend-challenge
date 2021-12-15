@@ -1,11 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { IoIosContact } from "react-icons/io";
 import { useSelector, useDispatch } from 'react-redux';
-import { selectcontactlst } from './action/action'
+import { selectcontactlst, titleid } from './action/action'
+
 
 function SelectContact() {
+    const Navigate = useNavigate()
+    
     const person = useSelector(state => state.user)
     const selectedlist = useSelector(state => state.SelectcontactReducer)
     const dispatch = useDispatch()
@@ -14,6 +17,13 @@ function SelectContact() {
     const [selectedcontactlist, setselectedcontactlist] = useState([])
     const [showcontinue, setshowcontinue] = useState()
     useEffect(() => {
+
+        axios.get(`http://34.122.252.114:3000/conversations`, { headers: { "user_id": localStorage.getItem('user_id') } })
+            .then(res => {
+                console.log('yourconvo',res);
+                setyourConvo(res.data)
+            })
+
         axios.get('http://34.122.252.114:3000/contacts')
             .then(res => {
                 const data = res.data
@@ -22,11 +32,6 @@ function SelectContact() {
 
             })
             .catch(err => console.log(err))
-
-        axios.get(`http://34.122.252.114:3000/conversations`, { headers: { "user_id": person[0]?.id } })
-            .then(res => {
-                setyourConvo(res.data)
-            })
 
             .catch(err => console.log(err))
     }, [])
@@ -53,14 +58,21 @@ function SelectContact() {
         dispatch(selectcontactlst(selectedcontactlist))
     }
 
+    const ShowChat = (value) => {
+        dispatch(titleid(value.title))
+        Navigate(`/chat/${value?.id}`)
+        
+    }
+    
+
     return (
         <div className="container">
 
-            {yourconvo ? <>
-            <h1 className="mt-5">Your Conversations</h1>
+                {yourconvo ? <>
+                <h1 className="mt-5">Your Conversations</h1>
 
                 {yourconvo.map((value, index) => {
-                    return <div className="contacts-convo py-2" key={index}>
+                    return <div className="contacts-convo py-2" key={index} onClick={()=>{ShowChat(value)}}>
 
                         <IoIosContact size="90" className="contact-icon" />
                         <div>
@@ -73,12 +85,12 @@ function SelectContact() {
 
                     </div>
                 })}
-                <Link to="/createNew" className="create-new">Create New Conversation</Link>
+                <Link to="/createNew" className="create-new" >Create New Conversation</Link>
             </>
 
                 :
                 <>
-                    <p className="y-heading">Welcome {`${person[0]?.name}!`}</p>
+                    <p className="y-heading">Welcome {localStorage.getItem('user_name')}</p>
                     <p className="y-heading" style={{ color: "lightgray" }}>You dont have any conversations</p>
 
 

@@ -7,6 +7,7 @@ import SelecttoMessage from './component/SelecttoMessage';
 import Conversation from './component/Conversation';
 import Allgroup from './component/Allgroup';
 import CreateNew from './component/CreateNew';
+import Chat from './component/Chat';
 function App() {
 
   const userid = localStorage.getItem('user_id')
@@ -21,10 +22,7 @@ function App() {
           <Route exact path='/conversations' element={<Conversation/>}/>
           <Route exact path='/allconversations' element={<Allgroup/>}/>
           <Route exact path='/createNew' element={<CreateNew/>}/>
-
-
-
-
+          <Route exact path='/chat/:id' element={<Chat/>}/>
         </Routes>
       </Router>
       

@@ -23,7 +23,9 @@ function Yourself() {
         setshowcontinue(true)
         setPerson(value)
         dispatch(setuser(value))
-        localStorage.setItem('user_id',value)
+        localStorage.setItem('user_id',value.id)
+        localStorage.setItem('user_name',value.name)
+
     }
     return (
         <div>

@@ -54,9 +54,9 @@ font-size: 30px
 
 .title{
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 500px;
+  /* align-items: center; */
+  justify-content: space-between;
+  margin-top: 350px;
 
 }
 
@@ -77,7 +77,7 @@ font-size: 30px
   align-items: center;
 }
 .title-conversations{
-  size: 64px;
+  size: 80px;
 }
 .create-new{
   float: right;
@@ -87,7 +87,7 @@ font-size: 30px
   border-radius:10px;
   text-decoration: none;
   margin-bottom:50px ;
-  box-shadow: 0px 5appx;
+  box-shadow: 0px 5px;
 }
 .contacts-convo:hover{
   background-color: lightblue;

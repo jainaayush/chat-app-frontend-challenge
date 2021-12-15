@@ -50,7 +50,7 @@ function SelecttoMessage() {
     }
     return (
         <div>
-            <p className="y-heading">Welcome {`${person[0]?.name}!`}</p>
+            <p className="y-heading">Welcome {localStorage.getItem('user_name')}</p>
             <p className="y-second-heading">Give title to start conversation with {selectedlist?.length} participants</p>
             <div className="selected-to-message-contacts">
                 {selectedlist && selectedlist.map((value, index) => {
@@ -67,7 +67,7 @@ function SelecttoMessage() {
                 })}
             </div>
 
-            <div className="title">
+            <div className="title container">
                 <input placeholder="enter title" type="text" onChange={(e) => settitle(e.target.value)} />
                 <Link to="/conversations" className="start-convo" onClick={() => { startConvoBtn() }}>start conversation</Link>
             </div>
