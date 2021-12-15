@@ -10,6 +10,7 @@ function CreateNew() {
     const [selectedcontactlist, setselectedcontactlist] = useState([])
     const person = useSelector(state => state.user)
     const [showcontinue, setshowcontinue] = useState()
+    const [oldvalue, setoldvalue] = useState()
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -25,6 +26,15 @@ function CreateNew() {
 
     }, [])
     const handleYourself = (value) => {
+        const value1 = document.getElementById(value.name)
+        setoldvalue(value)
+        console.log(oldvalue,value);
+
+        if(oldvalue?.name == value?.name){
+            value1.style.color = "black"    
+        }else{
+            value1.style.color = "blue"
+         }
         if (!showcontinue) {
             setselectedcontactlist([...selectedcontactlist, { value }])
             setshowcontinue(true)
@@ -52,7 +62,7 @@ function CreateNew() {
             {contactList && contactList.map((value, index) => {
                 return <div className="contacts" key={index}>
 
-                    <IoIosContact size="64" onClick={() => { handleYourself(value) }} className="contact-icon" />
+                    <IoIosContact size="64" onClick={() => { handleYourself(value) }} className="contact-icon" id={value.name   } />
                     <div>
                         <span>{value.name}</span><br />
                         <span style={{ color: "lightgray" }} className="mt-2">hey! i am using whatsapp</span>

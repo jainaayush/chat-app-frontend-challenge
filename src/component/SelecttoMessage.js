@@ -6,18 +6,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { titleid } from './action/action';
 
-
-
-
 function SelecttoMessage() {
     const Navigate = useNavigate()
     const dispatch = useDispatch()
     const tid= useSelector(state => state.TitleReducer)
-
     const person = useSelector(state => state.user)
     const selectedlist = useSelector(state => state.SelectcontactReducer)
     const [title, settitle] = useState('')
     const [contact_ids, setid] = useState([])
+    
 
 
     useEffect(() => {
